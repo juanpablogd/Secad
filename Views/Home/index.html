@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>SAGA</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  <!-- CSS Resources -->
+  <link href="../../Resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../Resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="../../Resources/FontAwesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../Resources/BootstrapDialog/css/bootstrap-dialog.min.css" rel="stylesheet">
+  <link href="../../Resources/Animate/animate.css" rel="stylesheet">
+  <link href="../../Resources/ol3/ol.css" rel="stylesheet">
+  <link href="../../Resources/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  
+  
+  <!-- CSS app -->
+  <link href="../../Content/Home/NavMap.css" rel="stylesheet">
+  <link href="../../Content/Home/ContentMap.css" rel="stylesheet">
+  
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+	      <a  href="#">
+	      	<img src="../../Images/Home/logos_gobernacion.png" class="LogoMap"  >
+	      </a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="#">
+	        	<i class="fa fa-map-marker" aria-hidden="true"></i> Mapa </a></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+	                </a>
+	            	<ul class="dropdown-menu dropdown-user">
+	                    <li id="Perfil"><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
+	                    </li>
+	                    <li id="CambiarClave"><a href="#"><i class="fa fa-gear fa-fw"></i> Cambiar Contraseña</a>
+	                    </li>
+	                    <li class="divider"></li>
+	                    <li id="CerrarSession"><a ><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
+	                    </li>
+	                </ul>
+	          </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+   <!-- Panel Mapa -->
+   <div id="map" class="map">
+   	  <div id="gmap" class="fill"></div>
+      <div id="olmap" class="fill"></div>
+      <div id="info"></div>
+       <div id="PanelCapasBase"  class="PanelCapasBase" >
+		   	<div id="myCarousel" class="carousel slide">
+		    <!-- Carousel items -->
+		    <div class="carousel-inner">
+		    	<div class="item active">
+			        <div class="row-fluid">
+			          <div class="col-sm-12 col-md-12 BaseImg" id="base_osm_calles">
+			          	<a href="#" class="thumbnail"><img src="../../Images/Map/base_osm_calles.png"  >
+			          		<div class="carousel-caption captionBlue"><center><h6>MapQuest OSM</h6></center></div>
+			           	</a>
+			          </div>
+			        </div><!--/row-fluid-->
+			    </div><!--/item-->
+		    </div><!--/carousel-inner-->
+		  
+			  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left"></span>
+			  </a>
+			  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right"></span>
+			  </a>
+		    </div><!--/myCarousel-->
+		     
+		</div>
+		<div id="PanelLeyenda"  class="PanelLeyenda" >
+		 	  <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h5 class="panel-title">
+		        			<a class="panel-title">Leyenda</a>
+			      		</h5>
+                </div>
+                <div  class="panel-body" style="max-width: 300px;">
+                        <div id="symbols"> </div>
+                        <div id="labels"> </div>
+                </div>
+            </div>
+		</div>
+		<div id="PanelHerramientas"  class="PanelHerramientas" >
+		 	  <div class="panel panel-primary">
+               <div  class="panel-body"  style="max-width: 600px;">
+                   <ul class="nav nav-tabs">
+				    <li class="active"><a data-toggle="tab" href="#time">Tiempo</a></li>
+				    <li><a data-toggle="tab" href="#evento">Eventos</a></li>
+				    <li><a data-toggle="tab" href="#espacio">Espacio</a></li>
+				  </ul>
+
+				  <div class="tab-content">
+				    <div id="time" class="tab-pane fade in active">
+				      <div class="form-group">
+					        <div class="row">
+					            <div class="col-md-6">
+					                <h5 class="inner"><b>FECHA INICIAL</b></h5>
+					                <hr>
+					                <div id="fechaIni"></div>
+					            </div>
+					            <div class="col-md-6">
+					            	<h5 class="inner"><b>FECHA FINAL</b></h5>
+					            	<hr>
+					                <div id="fechaFin"></div>
+					            </div>
+					        </div>
+					    </div>
+				    </div>
+				    <div id="evento" class="tab-pane fade">
+				      <h3>Menu 1</h3>
+				      <p></p>
+				    </div>
+				    <div id="espacio" class="tab-pane fade">
+				      <h3>Menu 2</h3>
+				      <p></p>
+				    </div>
+				    
+				  </div>
+				 </div>
+				 
+				 <button type="button" class="btn btn-primary btn-block" id="Buscar">
+				 	<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
+				 </button>
+            </div>
+		</div>
+   </div>
+   
+   <!-- Panel Street View -->
+   <div id="PanelStreetView" class="PanelStreetView"></div>
+   
+   <!-- Carousel Base Layers -->
+  
+	
+</body>
+	<!-- script Resources -->
+	<script src="../../Resources/socket/socket.io.js"></script>
+	<script src="../../Resources/Jquery/jquery-1.12.3.min.js"></script>
+	<script src="../../Resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../Resources/ie/js/ie-emulation-modes-warning.js"></script>
+	<script src="../../Resources/ie/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="../../Resources/moment/moment-with-locales.min.js"></script>	
+	<script src="../../Resources/socket/socket.io.js"></script>				
+	<script src="../../Resources/bootbox/bootbox.min.js"></script>
+	<script src="../../Resources/Crypto/core-min.js"></script>
+	<script src="../../Resources/Crypto/aes.js"></script>
+	<script src="../../Resources/BootstrapDialog/js/bootstrap-dialog.min.js"></script>
+	<script src="../../Resources/growl/bootstrap-growl.min.js"></script>
+	<script src="../../Resources/growl/Notificaciones.js"></script>
+	<script src="../../Resources/fastclick/fastclick.min.js"></script>
+	<script src="../../Resources/ol3/ol-debug.js"></script>
+	<script src="../../Resources/topojson/topojson.min.js"></script>
+	<script src="../../Resources/geocolor/geocolor.js"></script>
+	<script src="../../Resources/Numeral-js/min/numeral.min.js"></script>
+	<script src="../../Resources/datetimepicker/bootstrap-datetimepicker.js"></script>
+	
+	<!-- app Resources -->
+	<script src="../../Scripts/Config.js"></script>
+	<script src="../../Scripts/Func.js"></script>
+	<script src="../../Scripts/Home/Navbar.js"></script>
+	<script src="../../Scripts/Map.js"></script>
+	<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false&callback=gmaps.InitMapGoogle"></script>
+	<script src="../../Scripts/Home/Main.js"></script>
+	<script src="../../Scripts/Home/AppSecad.js"></script>
+</html>
